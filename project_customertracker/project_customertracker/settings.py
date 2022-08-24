@@ -75,9 +75,18 @@ WSGI_APPLICATION = "project_customertracker.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    # "default": {
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     "NAME": BASE_DIR / "db.sqlite3",
+    # }
+
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "product_tracker", # db name
+        "HOST": "localhost", # host name
+        "USER": "root", # host user
+        "PASSWORD": "", # host user password
+        "PORT": "3306"   # mysql port number
     }
 }
 
