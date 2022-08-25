@@ -6,4 +6,9 @@ PRODUCT Create
 
 {% block body_content %}
 <h1>Product Create</h1>
+<form action="#">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="button" value="ADD NEW" class="btn btn-primary">
+</form>
 {% endblock %}
