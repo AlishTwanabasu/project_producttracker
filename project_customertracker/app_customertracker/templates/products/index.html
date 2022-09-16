@@ -4,36 +4,43 @@
 PRODUCT List
 {% endblock %}
 
-{% block body_content %}
-<h1>Product List</h1>
-<h5><a href="{% url 'product.create' %}">Add New</a></h5>
+{% block custom_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
 
-<table class="table table-striped-columns">
-    <thead>
-        <tr>
-            <th>S.No</th>
-            <th>First Name</th>
-            <th>Middle Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for user in app_users %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.middle_name }}</td>
-            <td>{{ user.last_name }}</td>
-            <td>{{ user.email }}</td>
-            <td>
-                <a href="#">Edit</a>
-                <a href="#">Show</a>
-                <a href="#">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}     
-    </tbody>
-</table>
+
+{% block body_content %}
+<div class="container">
+    <h1>Product List</h1>
+    <h5><a href="{% url 'product.create' %}">Add New</a></h5>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in app_users %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.middle_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <a href="{% url 'product.edit' user.id %}"><i class="fa-solid fa-pencil"></i></a>
+                    <a href="{% url 'product.show' user.id %}"><i class="fa-solid fa-eye"></i></a>
+                    <a href="{% url 'product.delete' user.id %}"><i class="fa-solid fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

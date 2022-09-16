@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from app_customertracker.forms import ProductCreateForm
 
 from .models import AppUser, Product
+
 
 # Create your views here.
 def product_index(request):
@@ -11,6 +12,40 @@ def product_index(request):
     context = {"app_users": app_users}
     return render(request, template, context)
     
+def product_show(request, id):
+    app_users = AppUser.objects.get(id=id)
+    template = 'products/show.html'
+    context = {"users":app_users}
+    return render(request, template, context)
+
+def product_edit(request, id):
+    user = AppUser.objects.get(id=id)
+    template = 'products/edit.html'
+    context = {"user":user}
+    return render(request, template, context)
+
+def product_update(request):
+    if request.method == "POST":
+        # fetching project object 
+        user = AppUser.objects.get(id=request.POST.get("id"))
+
+        # assigning new value to attributes
+        user.first_name = request.POST.get("first_name")
+        user.middle_name = request.POST.get("middle_name")
+        user.last_name = request.POST.get("last_name")
+
+        # updating value to db
+        user.save()
+        return redirect('product.index')
+
+    return redirect('product.index')
+
+def product_delete(request, id):
+    app_users = AppUser.objects.get(id=id)
+    app_users.delete()
+
+    return redirect('product.index')
+
 def product_create(request):
     create_form = ProductCreateForm
     context = {"form": create_form}

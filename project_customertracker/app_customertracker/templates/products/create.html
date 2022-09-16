@@ -5,19 +5,21 @@ PRODUCT Create
 {% endblock %}
 
 {% block body_content %}
-<h1>Product Create</h1>
-<h5><a href="{% url 'product.index' %}">View List</a></h5>
-{% if msg %} 
-<div class="alert alert-success" role="alert">
-    {{ msg }}
-</div>
+<div class="container">
+    <h1>Product Create</h1>
+    <h5><a href="{% url 'product.index' %}">View List</a></h5>
+    {% if msg %}
+    <div class="alert alert-success" role="alert">
+        {{ msg }}
+    </div>
 
-{% endif %}
-<br>
-<form action="#" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="ADD NEW" class="btn btn-primary">
-</form>
+    {% endif %}
+    <br>
+    <form action="#" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="ADD NEW" class="btn btn-primary">
+    </form>
+</div>
 
 {% endblock %}

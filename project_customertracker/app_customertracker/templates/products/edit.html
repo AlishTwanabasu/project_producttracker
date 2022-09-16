@@ -5,5 +5,29 @@ PRODUCT Edit
 {% endblock %}
 
 {% block body_content %}
-<h1>Product Edit</h1>
+<div class="container">
+    <h1>Product Edit</h1>
+    <h5><a href="{% url 'product.index' %}">View List</a></h5>
+    <form action="{% url 'product.update' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ user.id }}">
+
+        <div class="form-group mb-2">
+            <label for="first_name">First Name:</label>
+            <input type="text" class="form-control" value="{{ user.first_name }}" name="first_name">
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="middle_name">Middle Name:</label>
+            <input type="text" class="form-control" value="{{ user.middle_name }}" name="middle_name">
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="last_name">Last Name:</label>
+            <input type="text" class="form-control" value="{{ user.last_name }}"  name="last_name">
+        </div>
+        <input type="submit" class="'btn btn-primary" value="Update">
+    </form>
+</div>
+
 {% endblock %}
